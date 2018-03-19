@@ -27,5 +27,5 @@ Want Even Bigger? [**Coming Soon!** The image below isn't tested. **Catch it in 
 Wondering about that image there?
 <details>
   <summary>Here it is!</summary>
-  ![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/waifusraysmemes.png)
+ <p>![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/waifusraysmemes.png)</p>
 </details>
