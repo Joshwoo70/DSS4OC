@@ -26,6 +26,8 @@ Want Even Bigger? [**Coming Soon!** The image below isn't tested. **Catch it in 
 ![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/largetheather.png)  
 Wondering about that image there?
 <details>
-  <summary>Here it is!</summary>
- <p>![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/waifusraysmemes.png)</p>
+  <summary>Here it is!</summary><p>
+ 
+ ![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/waifusraysmemes.png)
+ </p>
 </details>
