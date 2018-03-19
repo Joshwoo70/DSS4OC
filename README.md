@@ -16,18 +16,18 @@ To:
  
 ### Setup  
 It's quite simple. Here's a Picture:
-![5.1 Pictorial](https://github.com/Joshwoo70/DSS4OC/raw/master/5.1surroundsound.png)  
+![5.1 Pictorial](https://github.com/Joshwoo70/DSS4OC/raw/master/images/basicsetup.png)  
 The colour corresponds to these drives:
-![Colour](https://github.com/Joshwoo70/DSS4OC/raw/master/drives.png)
+![Colour](https://github.com/Joshwoo70/DSS4OC/raw/master/images/drives.png)
 Want something bigger? [Viewing Room Size]  
 [**Note:** Wool symbolises Solid blocks. They are optional.]  
-![viewing room size](https://github.com/Joshwoo70/DSS4OC/raw/master/viewingroom.png)
+![viewing room size](https://github.com/Joshwoo70/DSS4OC/raw/master/images/viewingroom.png)
 Want Even Bigger? [You may try this... however, It won't sound so great.]
-![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/largetheather.png)  
+![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/images/largetheather.png)  
 Wondering about that image there?
 <details>
   <summary>Here it is!</summary><p>
  
- ![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/waifusraysmemes.png)
+ ![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/images/waifusraysmemes.png)
  </p>
 </details>
