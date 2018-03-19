@@ -1,9 +1,8 @@
 # *DSS4OC*
 *Bringing...*  
-|S|u|r|r|o|u|n|d|
-|-|-|-|-|-|-|-|-|
-|S| |o| |u| |n|d|
-|-|-|-|-|-|-|-|-|
+
+***Surround*** | ***Sound***
+------------ | -------------
 
 To:  
 ![Open Computers](https://oc.cil.li/uploads/monthly_2017_09/4_BlZNHdl.png.5ef3cdd2e78cb6f99ad2909647ee0be7.png.9d16d85155a918824825f5f0735da47e.png)
