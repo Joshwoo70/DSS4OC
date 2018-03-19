@@ -23,4 +23,9 @@ Want something bigger? [Viewing Room Size]
 [**Note:** Wool symbolises Solid blocks. They are optional.]  
 ![viewing room size](https://github.com/Joshwoo70/DSS4OC/raw/master/viewingroom.png)
 Want Even Bigger? [**Coming Soon!** The image below isn't tested. **Catch it in LimboCon!**]
-![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/largetheather.png)
+![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/largetheather.png)  
+Wondering about that image there?
+<details>
+  <summary>Here it is!</summary>
+  ![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/waifusraysmemes.png)
+</details>
