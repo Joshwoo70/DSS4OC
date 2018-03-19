@@ -37,4 +37,4 @@ for x in os.listdir('workinginputs'):
                      os.path.join(os.getcwd(), 'output', f'{x}.dfpwm')])
 for x in os.listdir('workinginputs'):
     os.remove(os.path.join('workinginputs', x))
-print("Finished.")
+print("Finished. check output folder.")

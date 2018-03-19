@@ -1,7 +1,7 @@
 # *DSS4OC*
 *Bringing...*  
 
-***Surround*** | ***Sound***
+***S u r r o u n d*** | ***S o u n d***
 ------------ | -------------
 
 To:  
@@ -22,7 +22,7 @@ The colour corresponds to these drives:
 Want something bigger? [Viewing Room Size]  
 [**Note:** Wool symbolises Solid blocks. They are optional.]  
 ![viewing room size](https://github.com/Joshwoo70/DSS4OC/raw/master/viewingroom.png)
-Want Even Bigger? [**Coming Soon!** The image below isn't tested. **Catch it in LimboCon!**]
+Want Even Bigger? [You may try this... however, It won't sound so great.]
 ![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/largetheather.png)  
 Wondering about that image there?
 <details>
