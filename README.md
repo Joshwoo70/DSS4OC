@@ -12,7 +12,7 @@ To:
 - A: DFPWM is a mono codec... however...  
 `stereo can be achieved by running two streams in parallel`  
  I split all the tracks (5 tracks in total) into individual mono tracks and then encoded in DFPWM.  
- This is then fed to OC and a 5.1 Surround Sound set up with speakers and tape drives.
+ This is then fed to OC and a Surround Sound set up with speakers and tape drives.
  
 ### Setup  
 It's quite simple. Here's a Picture:
