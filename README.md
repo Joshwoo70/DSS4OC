@@ -16,7 +16,7 @@ To:
  
 ### Setup  
 It's quite simple. Here's a Picture:
-![5.1 Pictorial](https://github.com/Joshwoo70/DSS4OC/raw/master/images/basicsetup.png)  
+![Surround Sound](https://github.com/Joshwoo70/DSS4OC/raw/master/images/basicsetup.png)  
 The colour corresponds to these drives:
 ![Colour](https://github.com/Joshwoo70/DSS4OC/raw/master/images/drives.png)
 Want something bigger? [Viewing Room Size]  
