@@ -24,7 +24,7 @@ Want something bigger? [Viewing Room Size]
 ![viewing room size](https://github.com/Joshwoo70/DSS4OC/raw/master/images/viewingroom.png)
 Want Even Bigger? [You may try this... however, It won't sound so great.]
 ![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/images/largetheather.png)  
-Wondering about that image there?
+Wondering about those images at the side there?
 <details>
   <summary>Here it is!</summary><p>
  
