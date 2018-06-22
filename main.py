@@ -66,7 +66,6 @@ files = []
 for file in os.listdir('output'):
     size = os.stat(os.path.join('output',file)).st_size
     files.append(size)
-    pass  # TODO: combine files.
 print("Writing DFPWMX...")
 with open(os.path.join('output',os.path.split(sys.argv[1])[-1])+'.dfpwmx','wb') as f:
     f.write(b"\x00DFPWMX"+b"\xff")
@@ -83,4 +82,4 @@ with open(os.path.join('output',os.path.split(sys.argv[1])[-1])+'.dfpwmx','wb') 
                     break
                 f.write(data)
 
-print("Finished. check output folder.")
+print(f"Finished. {os.path.join(os.getcwd(),'output',os.path.split(sys.argv[1])[-1])+'.dfpwmx')}")
