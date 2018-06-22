@@ -22,12 +22,4 @@ The colour corresponds to these drives:
 Want something bigger? [Viewing Room Size]  
 [**Note:** Wool symbolises Solid blocks. They are optional.]  
 ![viewing room size](https://github.com/Joshwoo70/DSS4OC/raw/master/images/viewingroom.png)
-Want Even Bigger? [You may try this... however, It won't sound so great.]
-![Theather Sized](https://github.com/Joshwoo70/DSS4OC/raw/master/images/largetheather.png)  
-Wondering about those images at the side there?
-<details>
-  <summary>Here it is!</summary><p>
- 
- ![Yep...](https://github.com/Joshwoo70/DSS4OC/raw/master/images/waifusraysmemes.png)
- </p>
-</details>
+
