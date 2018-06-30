@@ -30,6 +30,7 @@ else if params[1] == "volume" then
         io.stderr:write("Volume needs to be a number between 0.0 and 1.0")
     end
     for k,z in component.list() do if v == "tape_drive" then component.proxy(k).setVolume(v) end end
+
 end
 
 end
