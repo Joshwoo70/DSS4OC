@@ -20,5 +20,4 @@ if params[1] == "write" then
         end
     end
     for k,v in component.list() do if v == "tape_drive" then component.proxy(k).play() end end
-
 end
