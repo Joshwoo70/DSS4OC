@@ -1,12 +1,25 @@
 import sys
 import subprocess
 import os
+
 """
 Audio modes:
 0: Mono [Not used]
 1: Stereo
 2:
 """
+
+
+def read_in_chunks(file_object, chunk_size=1024):
+    """Lazy function (generator) to read a file piece by piece.
+    Default chunk size: 1k."""
+    while True:
+        data = file_object.read(chunk_size)
+        if not data:
+            break
+        yield data
+
+
 proc = subprocess.Popen(['ffprobe', sys.argv[1]], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 _, stde = proc.communicate()
 stde = stde.decode('utf-8').replace("      ", "").replace("  ", "")
@@ -64,16 +77,30 @@ for x in os.listdir('workinginputs'):
     os.remove(os.path.join('workinginputs', x))
 files = []
 for file in os.listdir('output'):
-    size = os.stat(os.path.join('output',file)).st_size
+    size = os.stat(os.path.join('output', file)).st_size
     files.append(size)
 print("Writing DFPWMX...")
-with open(os.path.join('output',os.path.split(sys.argv[1])[-1])+'.dfpwmx','wb') as f:
-    f.write(b"\x00DFPWMX"+b"\xff")
-    f.write(str(len(files)).zfill(2).encode()+b"\xff")
+mixedstream = False
+bytesperside = 1024
+with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'wb') as f:
+    f.write(b"\x00DFPWMX" + b"\xffB")
+    if mixedstream:
+        f.write(b"\x01")
+        f.write(bytesperside.to_bytes(4, 'big'))
+    else:
+        f.write(b"\x00")
+    f.write(b"\x00" if not mixedstream else b"\x01")
+    f.write(b"F")
+    f.write(str(len(files)).zfill(2).encode() + b"\x00")
     for fsize in files:
-        f.write(str(fsize).encode()+b"\xff")
-    f.write(b"\xff")
+        f.write(str(fsize).encode() + b"\x00")
+    f.write(b"\x00")
     folderlist = os.listdir('output')
+    if mixedstream:
+        filesobject = [read_in_chunks(open(os.path.join('output', file), 'rb'), bytesperside) for file in folderlist]
+        while True:
+            for fileobj in filesobject:
+                f.write(next(fileobj))
     for file in folderlist:
         with open(os.path.join('output', file), 'rb') as f2:
             while True:
