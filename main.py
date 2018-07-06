@@ -1,7 +1,12 @@
 import sys
 import subprocess
 import os
-
+try:
+    import tqdm
+except ImportError:
+    import pip
+    pip.main(['install', 'tqdm'])
+    import tqdm
 """
 Audio modes:
 0: Mono [Not used]
@@ -16,7 +21,7 @@ def read_in_chunks(file_object, chunk_size=1024):
     while True:
         data = file_object.read(chunk_size)
         if not data:
-            break
+            yield True
         yield data
 
 
@@ -46,7 +51,8 @@ for x in stde:
         break
 
 if channel is None:
-    print("No Dual Soundable Streams!")
+    print("No Surround or Stereo Streams! [Currently Supports only 5.1 and Stereo]\n"
+          "If you have a file that isn't mono and isn't supported., launch Github request and I'll have a look.")
     sys.exit(1)
 if audiomode == 1:
     subprocess.call(['ffmpeg', '-i', sys.argv[1], '-filter_complex',
@@ -80,27 +86,49 @@ for file in os.listdir('output'):
     size = os.stat(os.path.join('output', file)).st_size
     files.append(size)
 print("Writing DFPWMX...")
-mixedstream = False
+mixedstream = True
 bytesperside = 1024
+pbar = tqdm.tqdm(desc="Writing .DFPWMX...")
 with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'wb') as f:
     f.write(b"\x00DFPWMX" + b"\xffB")
+    pbar.update(2)
     if mixedstream:
-        f.write(b"\x01")
+        f.write(b"\x02")
         f.write(bytesperside.to_bytes(4, 'big'))
+        pbar.update(5)
     else:
-        f.write(b"\x00")
-    f.write(b"\x00" if not mixedstream else b"\x01")
+        f.write(b"\x01")
+        pbar.update(1)
     f.write(b"F")
+    pbar.update(1)
     f.write(str(len(files)).zfill(2).encode() + b"\x00")
+    pbar.update(2)
     for fsize in files:
         f.write(str(fsize).encode() + b"\x00")
-    f.write(b"\x00")
+        pbar.update(len(str(fsize))+1)
+    f.write(b"\xff")
+    pbar.update(1)
     folderlist = os.listdir('output')
     if mixedstream:
-        filesobject = [read_in_chunks(open(os.path.join('output', file), 'rb'), bytesperside) for file in folderlist]
+        filesobject = list([read_in_chunks(open(os.path.join('output', file), 'rb'), bytesperside) for file in folderlist])
         while True:
             for fileobj in filesobject:
-                f.write(next(fileobj))
+                if not fileobj:
+                    data = next(fileobj)
+                    if not data:
+                        fileobj.close()
+                        ab = filesobject.index(fileobj)
+                        filesobject[ab] = False
+                    else:
+                        if len(data) != bytesperside:
+                            data = data + b"\x00"*(bytesperside-len(data))
+                        f.write(data)
+                        pbar.update(bytesperside)
+                elif all(filesobject):
+                    break
+                else:
+                    f.write(b"\x00"*bytesperside)
+                    pbar.update(1024)
     for file in folderlist:
         with open(os.path.join('output', file), 'rb') as f2:
             while True:
@@ -108,5 +136,5 @@ with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'w
                 if not data:
                     break
                 f.write(data)
-
+pbar.close()
 print(f"Finished. {os.path.join(os.getcwd(),'output',os.path.split(sys.argv[1])[-1])+'.dfpwmx')}")
