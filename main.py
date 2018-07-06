@@ -1,10 +1,12 @@
 import sys
 import subprocess
 import os
+
 try:
     import tqdm
 except ImportError:
     import pip
+
     pip.main(['install', 'tqdm'])
     import tqdm
 """
@@ -13,7 +15,17 @@ Audio modes:
 1: Stereo
 2:
 """
-
+if len(sys.argv) < 2:
+    print("python main.py (Stereo/5.1 Surround Sound File) [Enable mixedstream]")
+if sys.argv[1] in ["-help", '--help']:
+    print("python main.py (File) [OPTIONS]")
+    print("Options:")
+    print(" --mixedmode [Enables MixedStream File output.]")
+    print(" --mixedbytes [Default: 1024 Bytes] [Set it to a binary number* if you want to save a programmers sanity.]")
+    print(" * Binary number as in [1024, 2048, 4096, etc...]")
+    print("License:")
+    print("Copyright © Ristellise. Licensed under the MIT License.")
+    print("All Issues should be filed here: https://github.com/GlobalEmpire/OC-Programs/issues")
 
 def read_in_chunks(file_object, chunk_size=1024):
     """Lazy function (generator) to read a file piece by piece.
@@ -25,6 +37,19 @@ def read_in_chunks(file_object, chunk_size=1024):
         yield data
 
 
+mixedstream = False
+bytesperside = 1024
+if sys.argv > 2:
+    for arg in sys.argv[1:-1]:
+        if arg.lower() == 'mixedmode':
+            mixedstream = True
+        elif arg.lower() == 'mixedbytes':
+            try:
+                bytesperside = sys.argv[sys.argv.index(arg) + 1]
+            except IndexError:
+                print("WARNING: --mixedbytes was specified but bytesize was not given!")
+            except ValueError:
+                print(f"WARNING: --mixedbytes {sys.argv[sys.argv.index(arg) + 1]} was not an number!")
 proc = subprocess.Popen(['ffprobe', sys.argv[1]], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 _, stde = proc.communicate()
 stde = stde.decode('utf-8').replace("      ", "").replace("  ", "")
@@ -86,8 +111,6 @@ for file in os.listdir('output'):
     size = os.stat(os.path.join('output', file)).st_size
     files.append(size)
 print("Writing DFPWMX...")
-mixedstream = True
-bytesperside = 1024
 pbar = tqdm.tqdm(desc="Writing .DFPWMX...")
 with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'wb') as f:
     f.write(b"\x00DFPWMX" + b"\xffB")
@@ -105,12 +128,13 @@ with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'w
     pbar.update(2)
     for fsize in files:
         f.write(str(fsize).encode() + b"\x00")
-        pbar.update(len(str(fsize))+1)
+        pbar.update(len(str(fsize)) + 1)
     f.write(b"\xff")
     pbar.update(1)
     folderlist = os.listdir('output')
     if mixedstream:
-        filesobject = list([read_in_chunks(open(os.path.join('output', file), 'rb'), bytesperside) for file in folderlist])
+        filesobject = list(
+            [read_in_chunks(open(os.path.join('output', file), 'rb'), bytesperside) for file in folderlist])
         while True:
             for fileobj in filesobject:
                 if not fileobj:
@@ -121,13 +145,13 @@ with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'w
                         filesobject[ab] = False
                     else:
                         if len(data) != bytesperside:
-                            data = data + b"\x00"*(bytesperside-len(data))
+                            data = data + b"\x00" * (bytesperside - len(data))
                         f.write(data)
                         pbar.update(bytesperside)
                 elif all(filesobject):
                     break
                 else:
-                    f.write(b"\x00"*bytesperside)
+                    f.write(b"\x00" * bytesperside)
                     pbar.update(1024)
     for file in folderlist:
         with open(os.path.join('output', file), 'rb') as f2:
@@ -137,4 +161,4 @@ with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'w
                     break
                 f.write(data)
 pbar.close()
-print(f"Finished. {os.path.join(os.getcwd(),'output',os.path.split(sys.argv[1])[-1])+'.dfpwmx')}")
+print(f"Finished. {os.path.join(os.getcwd(),'output',os.path.split(sys.argv[1])[-1])}.dfpwmx")
