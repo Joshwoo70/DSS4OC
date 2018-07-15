@@ -80,10 +80,9 @@ for x in stde:
         print("File is in Stereo Mode!")
         audiomode = 1
         break
-
 if channel is None:
     print("No Surround or Stereo Streams! [Currently Supports only 5.1 and Stereo]\n"
-          "If you have a file that isn't mono and isn't supported., launch Github request and I'll have a look.")
+          "If you have a file that isn't mono and isn't supported. Launch Github request and I'll have a look.")
     sys.exit(1)
 if audiomode == 1:
     subprocess.call(['ffmpeg', '-i', sys.argv[1], '-filter_complex',
@@ -159,7 +158,8 @@ with open(os.path.join('output', os.path.split(sys.argv[1])[-1]) + '.dfpwmx', 'w
                 elif all(filesobject):
                     break
                 else:
-                    f.write(b"\x00" * bytesperside)
+                    # Padding
+                    f.write(b"\x55" * bytesperside)
                     pbar.update(1024)
     else:
         for file in folderlist:
